@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">تذكير الصيام</string>
+
+  <string name="pref_title_language">اللغه</string>
+  <string name="pref_title_choose_language">إختر اللغه</string>
+
+  <string name="pref_title_enable_app">تفعيل الخدمه</string>
+
+  <string name="pref_cat_fasting_days">إختر أيام الصيام للتذكير</string>
+  <string name="pref_sum_fasting_notified">سيتم إشعارك لصيام هذا اليوم إن شاء الله</string>
+  <string name="pref_sum_fasting_white_notified">سيتم إشعارك لصيام هذه الأيام إن شاء الله</string>
+  <string name="pref_sum_fasting_ashura_notified">@string/pref_sum_fasting_white_notified</string>
+
+  <string name="pref_title_fasting_monday">الإثنين</string>
+
+  <string name="pref_title_fasting_thursday">الخميس</string>
+
+  <string name="pref_title_fasting_white_days">الأيام البيضاء</string>
+
+  <string name="pref_title_fasting_ashura">يوم عاشوراء</string>
+  <string name="pref_sum_fasting_ashura_num">(9 – 10) محرم</string>
+
+  <string name="pref_title_tips">معلومات مفيده!</string>
+</resources>

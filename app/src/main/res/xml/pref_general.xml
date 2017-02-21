@@ -1,0 +1,57 @@
+<!--suppress AndroidElementNotAllowed -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <ListPreference
+      android:defaultValue="0"
+      android:dialogTitle="@string/pref_title_choose_language"
+      android:entries="@array/language"
+      android:entryValues="@array/language_values"
+      android:key="@string/pref_key_lang_dialog"
+      android:summary="@string/lang_arabic"
+      android:title="@string/pref_title_language"/>
+
+  <SwitchPreferenceCompat
+      android:defaultValue="true"
+      android:key="@string/pref_key_enable_app"
+      android:title="@string/pref_title_enable_app"/>
+
+  <PreferenceCategory
+      android:dependency="@string/pref_key_enable_app"
+      android:title="@string/pref_cat_fasting_days">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_key_fasting_monday"
+        android:summaryOn="@string/pref_sum_fasting_notified"
+        android:title="@string/pref_title_fasting_monday"/>
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_key_fasting_thursday"
+        android:summaryOn="@string/pref_sum_fasting_notified"
+        android:title="@string/pref_title_fasting_thursday"/>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_key_fasting_white_days"
+        android:summary="@string/pref_sum_fasting_days_num"
+        android:summaryOn="@string/pref_sum_fasting_white_notified"
+        android:title="@string/pref_title_fasting_white_days"/>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_key_fasting_ashura"
+        android:summary="@string/pref_sum_fasting_ashura_num"
+        android:summaryOn="@string/pref_sum_fasting_ashura_notified"
+        android:title="@string/pref_title_fasting_ashura"/>
+
+  </PreferenceCategory>
+
+  <!--<PreferenceScreen android:title="@string/pref_title_tips">-->
+
+  <Preference
+      android:key="custom"
+      android:layout="@layout/prefs_questions_layout"/>
+
+  <!--</PreferenceScreen>-->
+</PreferenceScreen>

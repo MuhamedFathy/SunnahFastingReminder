@@ -1,4 +1,44 @@
 <resources>
-  <string name="app_name">SunnahFastingReminder</string>
-  <string name="action_settings">Settings</string>
+  <string name="app_name">Fasting Reminder</string>
+  <string name="lang_arabic" translatable="false">العربيه</string>
+  <string name="lang_english" translatable="false">English</string>
+
+  <string name="pref_title_language">Language</string>
+  <string name="pref_title_choose_language">Choose language</string>
+
+  <string name="pref_title_enable_app">Enable service</string>
+  <string name="pref_key_enable_app" translatable="false">enable_app</string>
+
+  <string name="pref_cat_fasting_days">Choose fasting days to remind</string>
+  <string name="pref_sum_fasting_notified">You will be notified to fast this day in sha\' allah</string>
+  <string name="pref_sum_fasting_white_notified">You will be notified to fast this days in sha\' allah</string>
+  <string name="pref_sum_fasting_ashura_notified">@string/pref_sum_fasting_white_notified</string>
+  <string name="pref_key_lang_dialog" translatable="false">language</string>
+
+  <string name="pref_title_fasting_monday">Monday</string>
+  <string name="pref_key_fasting_monday" translatable="false">day_monday</string>
+
+  <string name="pref_title_fasting_thursday">Thursday</string>
+  <string name="pref_key_fasting_thursday" translatable="false">day_thursday</string>
+
+  <string name="pref_title_fasting_white_days">White days</string>
+  <string name="pref_sum_fasting_days_num" translatable="false">(13 – 14 – 15)</string>
+  <string name="pref_key_fasting_white_days" translatable="false">white_days</string>
+
+  <string name="pref_title_fasting_ashura">Ashura day</string>
+  <string name="pref_sum_fasting_ashura_num">(9 – 10) Muharram</string>
+  <string name="pref_key_fasting_ashura">day_ashura</string>
+
+  <string name="pref_title_tips">Useful tips!</string>
+
+  <!-- Arrays -->
+  <string-array name="language">
+    <item>@string/lang_arabic</item>
+    <item>@string/lang_english</item>
+  </string-array>
+
+  <string-array name="language_values">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
 </resources>
