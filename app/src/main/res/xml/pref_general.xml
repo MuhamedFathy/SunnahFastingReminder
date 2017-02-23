@@ -32,14 +32,14 @@
         android:title="@string/pref_title_fasting_thursday"/>
 
     <CheckBoxPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="@string/pref_key_fasting_white_days"
         android:summary="@string/pref_sum_fasting_days_num"
         android:summaryOn="@string/pref_sum_fasting_white_notified"
         android:title="@string/pref_title_fasting_white_days"/>
 
     <CheckBoxPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="@string/pref_key_fasting_ashura"
         android:summary="@string/pref_sum_fasting_ashura_num"
         android:summaryOn="@string/pref_sum_fasting_ashura_notified"

@@ -5,11 +5,10 @@ android {
   buildToolsVersion "25.0.2"
   defaultConfig {
     applicationId "net.mEmoZz.FastingReminder"
-    minSdkVersion 14
+    minSdkVersion 11
     targetSdkVersion 25
     versionCode 1
     versionName "1.0"
-    vectorDrawables.useSupportLibrary = true
 
     jackOptions {
       enabled true
@@ -31,10 +30,9 @@ android {
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   compile project(':itl')
-  compile 'com.android.support:appcompat-v7:25.1.1'
-  compile 'com.android.support:design:25.1.1'
-  compile 'com.android.support:support-v4:25.1.1'
-  compile 'com.android.support:support-vector-drawable:25.1.1'
+  compile 'com.android.support:appcompat-v7:25.2.0'
+  compile 'com.android.support:design:25.2.0'
+  compile 'com.android.support:support-v4:25.2.0'
 
   // Third-party
   compile 'uk.co.chrisjenx:calligraphy:2.2.0'

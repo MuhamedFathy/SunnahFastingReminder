@@ -11,7 +11,7 @@
 
   <string name="pref_cat_fasting_days">Choose fasting days to remind</string>
   <string name="pref_sum_fasting_notified">You will be notified to fast this day in sha\' allah</string>
-  <string name="pref_sum_fasting_white_notified">You will be notified to fast this days in sha\' allah</string>
+  <string name="pref_sum_fasting_white_notified">You will be notified to fast those days in sha\' allah</string>
   <string name="pref_sum_fasting_ashura_notified">@string/pref_sum_fasting_white_notified</string>
   <string name="pref_key_lang_dialog" translatable="false">language</string>
 

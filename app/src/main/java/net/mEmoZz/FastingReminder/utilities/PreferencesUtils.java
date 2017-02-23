@@ -14,6 +14,7 @@ public class PreferencesUtils {
 
   private Context context;
   private Integer language;
+  private Boolean enableApp;
 
   public PreferencesUtils(Context context) {
     this.context = context;
@@ -26,6 +27,15 @@ public class PreferencesUtils {
   private int getLanguage(String defaultValue) {
     String key = context.getString(R.string.pref_key_lang_dialog);
     return Integer.parseInt(getPrefs().getString(key, defaultValue));
+  }
+
+  public boolean isAppEnabled() {
+    return enableApp == null ? enableApp = isAppEnabled(false) : enableApp;
+  }
+
+  private boolean isAppEnabled(boolean defaultValue) {
+    String key = context.getString(R.string.pref_key_enable_app);
+    return getPrefs().getBoolean(key, defaultValue);
   }
 
   private SharedPreferences getPrefs() {

@@ -1,7 +1,7 @@
 package net.mEmoZz.FastingReminder.application;
 
 import android.app.Application;
-import net.mEmoZz.FastingReminder.tools.language.Localization;
+import net.mEmoZz.FastingReminder.language.Localization;
 import net.mEmoZz.FastingReminder.utilities.Constants.FONTS;
 import net.mEmoZz.FastingReminder.utilities.Constants.LOCALE;
 import net.mEmoZz.FastingReminder.utilities.PreferencesUtils;

@@ -1,9 +1,8 @@
-package net.mEmoZz.FastingReminder.tools.language;
+package net.mEmoZz.FastingReminder.language;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -78,26 +77,24 @@ public class Localization {
     CharSequence[] titles = new CharSequence[] {
         "", ""
     };
-    builder.setSingleChoiceItems(titles, inputSelection, new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int item) {
-        dialog.dismiss();
-        switch (item) {
-          case 0:
-            if (inputSelection == item) return;
-            Localization.setLanguage(activity, Constants.LOCALE.LANG_ARABIC);
-            Utils.initCalligraphy(Constants.FONTS.ARABIC_FONT);
-            activity.startActivity(new Intent(activity, MainScreen.class));
-            activity.finish();
-            break;
-          case 1:
-            if (inputSelection == item) return;
-            Localization.setLanguage(activity, Constants.LOCALE.LANG_ENGLISH);
-            activity.setResult(Activity.RESULT_OK);
-            Utils.initCalligraphy(Constants.FONTS.ENGLISH_FONT);
-            activity.startActivity(new Intent(activity, MainScreen.class));
-            activity.finish();
-            break;
-        }
+    builder.setSingleChoiceItems(titles, inputSelection, (dialog, item) -> {
+      dialog.dismiss();
+      switch (item) {
+        case 0:
+          if (inputSelection == item) return;
+          Localization.setLanguage(activity, Constants.LOCALE.LANG_ARABIC);
+          Utils.initCalligraphy(Constants.FONTS.ARABIC_FONT);
+          activity.startActivity(new Intent(activity, MainScreen.class));
+          activity.finish();
+          break;
+        case 1:
+          if (inputSelection == item) return;
+          Localization.setLanguage(activity, Constants.LOCALE.LANG_ENGLISH);
+          activity.setResult(Activity.RESULT_OK);
+          Utils.initCalligraphy(Constants.FONTS.ENGLISH_FONT);
+          activity.startActivity(new Intent(activity, MainScreen.class));
+          activity.finish();
+          break;
       }
     });
     builder.create();

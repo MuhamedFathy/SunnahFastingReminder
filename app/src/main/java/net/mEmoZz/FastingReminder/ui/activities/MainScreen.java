@@ -50,9 +50,16 @@ public class MainScreen extends AppCompatActivity {
 
     SimpleHijriDate date = HijriCalc.toHijri(new Date());
     Log.wtf("hijriDayName", date.getDayOfWeekName(Locale.getDefault()));
+    Log.wtf("hijriDayOfWeek", date.getDayOfWeek() + "");
     Log.wtf("hijriDayOfMonth", date.getDayOfMonth() + 1 + "");
     Log.wtf("hijriMonth", date.getMonthName(Locale.getDefault()));
     Log.wtf("hijriYear", date.getYear() + "");
+
+    if (date.getDayOfWeek() == 1) {
+      System.out.println("الإثنين");
+    } else if (date.getDayOfWeek() == 4) {
+      System.out.println("الخميس");
+    }
   }
 
   private void initToolbar() {
