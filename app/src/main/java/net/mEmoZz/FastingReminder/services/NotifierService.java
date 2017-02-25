@@ -73,7 +73,7 @@ public class NotifierService extends Service {
       if (getPrefs().isFastWhites()) {
         if (date.getDayOfMonth() == 12) {
           pushMultipleFastingNotify(TYPE_WHITES, "13");
-        } else if (date.getDayOfMonth() == 28) {
+        } else if (date.getDayOfMonth() == 13) {
           pushMultipleFastingNotify(TYPE_WHITES, "14");
         } else if (date.getDayOfMonth() == 14) {
           pushMultipleFastingNotify(TYPE_WHITES, "15");
