@@ -1,4 +1,4 @@
-package net.mEmoZz.FastingReminder.application;
+package net.mEmoZz.FastingReminder;
 
 import android.app.Application;
 import net.mEmoZz.FastingReminder.language.Localization;
@@ -12,7 +12,7 @@ import net.mEmoZz.FastingReminder.utilities.Utils;
  * Contact: muhamed.gendy@gmail.com
  */
 
-public class BaseClass extends Application {
+public class FastingApplication extends Application {
 
   @Override public void onCreate() {
     super.onCreate();

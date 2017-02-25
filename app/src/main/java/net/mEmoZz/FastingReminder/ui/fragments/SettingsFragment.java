@@ -38,7 +38,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
   private Activity context;
   private Unbinder unbinder;
-  private ListPreference languagePrefs;
   private boolean switchEnabled;
 
   @Override
@@ -79,15 +78,13 @@ public class SettingsFragment extends PreferenceFragmentCompat
   private void initPrefs(PreferenceManager manager) {
     PreferenceManager.setDefaultValues(context, R.xml.pref_general, false);
 
-    languagePrefs = (ListPreference) manager.findPreference(language);
-
     switchEnabled = new PreferencesUtils(context).isAppEnabled();
     if (switchEnabled) startNotifierService();
-
-    updateLangSummary();
+    
+    updateLangSummary((ListPreference) manager.findPreference(language));
   }
 
-  private void updateLangSummary() {
+  private void updateLangSummary(ListPreference languagePrefs) {
     languagePrefs.setSummary(languagePrefs.getEntry());
   }
 
@@ -102,8 +99,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
   private boolean isServiceRunning(Class<?> serviceClass) {
     ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-    for (ActivityManager.RunningServiceInfo service
-        : manager.getRunningServices(Integer.MAX_VALUE)) {
+    for (
+        ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)
+        ) {
       if (serviceClass.getName().equals(service.service.getClassName())) {
         return true;
       }
@@ -115,7 +113,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
     if (key.equals(language)) {
       Localization.setLanguage(context, new PreferencesUtils(context).getLanguage());
       context.recreate();
-      updateLangSummary();
     } else if (key.equals(enableApp)) {
       switchEnabled = new PreferencesUtils(context).isAppEnabled();
       if (switchEnabled) {

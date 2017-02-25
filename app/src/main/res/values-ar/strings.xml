@@ -22,4 +22,12 @@
   <string name="pref_sum_fasting_ashura_num">(9 – 10) محرم</string>
 
   <string name="pref_title_tips">معلومات مفيده!</string>
+
+  <string name="do_not_forget">لا تنسى صيام غدًا إن شاء الله</string>
+
+  <string name="fast_monday">صيام الإثنين</string>
+  <string name="fast_thursday">صيام الخميس</string>
+  <string name="fast_whites">صيام الأيام البيضاء (يوم %1$s)</string>
+  <string name="fast_ashura">صيام عاشوراء (يوم %1$s)</string>
+
 </resources>

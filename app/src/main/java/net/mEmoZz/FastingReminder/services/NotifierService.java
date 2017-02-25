@@ -26,64 +26,101 @@ import org.arabeyes.itl.hijri.SimpleHijriDate;
 
 public class NotifierService extends Service {
 
-  private static final int ITHNAIN = 1;
-  private static final int KHAMEES = 4;
+  private static final int MUHARRAM = 0;
+  private static final int SUNDAY = 0;
+  private static final int WEDNESDAY = 3;
+  private static final int TYPE_WHITES = 1;
+  private static final int TYPE_ASHURA = 2;
 
   private Context context;
   private ScheduledExecutorService executorService;
   private Handler handler;
+  private SimpleHijriDate date;
 
   @Override public void onCreate() {
     context = this;
     handler = new Handler();
+    date = HijriCalc.toHijri(new Date());
     super.onCreate();
   }
 
   @Override public int onStartCommand(Intent intent, int flags, int startId) {
     if (new PreferencesUtils(context).isAppEnabled()) {
-      executorService = pushNotify();
-      runOnUiThread(
-          () -> Toast.makeText(this, "NotifierService started", Toast.LENGTH_LONG).show());
+      executorService = notifier();
+      runOnUiThread(() -> Toast.makeText(this, "Service started", Toast.LENGTH_LONG).show());
     }
     return START_STICKY;
   }
 
-  private ScheduledExecutorService pushNotify() {
-    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(5);
-    executorService.scheduleAtFixedRate(() -> runOnUiThread(() -> {
-          SimpleHijriDate date = HijriCalc.toHijri(new Date());
-          if (date.getDayOfWeek() == ITHNAIN) {
-            Toast.makeText(this, "الإثنين", Toast.LENGTH_SHORT).show();
-          } else if (date.getDayOfWeek() == KHAMEES) {
-            pushNotification("الخميس");
-          }
-        }),
-        0, 5, TimeUnit.SECONDS
-    );
+  private ScheduledExecutorService notifier() {
+    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(0);
+    executorService.scheduleAtFixedRate(this::notifyUser, 0, 13, TimeUnit.HOURS);
     return executorService;
+  }
+
+  private void notifyUser() {
+    if (date != null) {
+      if (getPrefs().isFastMonday()) {
+        if (date.getDayOfWeek() == SUNDAY) {
+          pushNotification(getString(R.string.fast_monday), getString(R.string.do_not_forget));
+        }
+      }
+      if (getPrefs().isFastThursday()) {
+        if (date.getDayOfWeek() == WEDNESDAY) {
+          pushNotification(getString(R.string.fast_thursday), getString(R.string.do_not_forget));
+        }
+      }
+      if (getPrefs().isFastWhites()) {
+        if (date.getDayOfMonth() == 12) {
+          pushMultipleFastingNotify(TYPE_WHITES, "13");
+        } else if (date.getDayOfMonth() == 28) {
+          pushMultipleFastingNotify(TYPE_WHITES, "14");
+        } else if (date.getDayOfMonth() == 14) {
+          pushMultipleFastingNotify(TYPE_WHITES, "15");
+        }
+      }
+      if (getPrefs().isFastAshura()) {
+        if (date.getMonth() == MUHARRAM) {
+          if (date.getDayOfMonth() == 8) {
+            pushMultipleFastingNotify(TYPE_ASHURA, "9");
+          } else if (date.getDayOfMonth() == 9) {
+            pushMultipleFastingNotify(TYPE_ASHURA, "10");
+          }
+        }
+      }
+    }
+  }
+
+  private PreferencesUtils getPrefs() {
+    return new PreferencesUtils(this);
   }
 
   private void runOnUiThread(Runnable runnable) {
     handler.post(runnable);
   }
 
-  private void pushNotification(String msg) {
+  private void pushMultipleFastingNotify(int type, String day) {
+    switch (type) {
+      case TYPE_WHITES:
+        pushNotification(getString(R.string.fast_whites, day), getString(R.string.do_not_forget));
+        break;
+      case TYPE_ASHURA:
+        pushNotification(getString(R.string.fast_ashura, day), getString(R.string.do_not_forget));
+        break;
+    }
+  }
+
+  private void pushNotification(String title, String msg) {
     NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
         .setSmallIcon(R.drawable.ic_stat_moon)
-        .setContentTitle("Test title")
+        .setContentTitle(title)
         .setContentText(msg)
         .setAutoCancel(true)
         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
         .setLights(ContextCompat.getColor(context, R.color.colorPrimary), 1500, 1000)
         .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
         .setPriority(NotificationCompat.PRIORITY_HIGH);
-
-    //builder.setContentIntent(pendingIntent);
-
-    //        builder.addAction(new NotificationCompat.Action());
-
-    NotificationManagerCompat.from(context)
-        .notify((int) System.currentTimeMillis(), builder.build());
+    NotificationManagerCompat.from(context).notify(0, builder.build());
   }
 
   @Override public void onDestroy() {

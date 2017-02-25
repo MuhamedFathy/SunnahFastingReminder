@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 import net.mEmoZz.FastingReminder.R;
+import net.mEmoZz.FastingReminder.utilities.Constants.LOCALE;
 
 /**
  * Authored by Mohamed Fathy on 20 Feb, 2017.
@@ -14,14 +15,14 @@ public class PreferencesUtils {
 
   private Context context;
   private Integer language;
-  private Boolean enableApp;
+  private Boolean enableApp, fastMonday, fastThursday, fastWhites, fastAshura;
 
   public PreferencesUtils(Context context) {
     this.context = context;
   }
 
   public int getLanguage() {
-    return language == null ? language = getLanguage(Constants.LOCALE.LANG_ARABIC + "") : language;
+    return language == null ? language = getLanguage(LOCALE.LANG_ARABIC + "") : language;
   }
 
   private int getLanguage(String defaultValue) {
@@ -35,6 +36,42 @@ public class PreferencesUtils {
 
   private boolean isAppEnabled(boolean defaultValue) {
     String key = context.getString(R.string.pref_key_enable_app);
+    return getPrefs().getBoolean(key, defaultValue);
+  }
+
+  public boolean isFastMonday() {
+    return fastMonday == null ? fastMonday = isFastMonday(false) : fastMonday;
+  }
+
+  private boolean isFastMonday(boolean defaultValue) {
+    String key = context.getString(R.string.pref_key_fasting_monday);
+    return getPrefs().getBoolean(key, defaultValue);
+  }
+
+  public boolean isFastThursday() {
+    return fastThursday == null ? fastThursday = isFastThursday(false) : fastThursday;
+  }
+
+  private boolean isFastThursday(boolean defaultValue) {
+    String key = context.getString(R.string.pref_key_fasting_thursday);
+    return getPrefs().getBoolean(key, defaultValue);
+  }
+
+  public boolean isFastWhites() {
+    return fastWhites == null ? fastWhites = isFastWhites(false) : fastWhites;
+  }
+
+  private boolean isFastWhites(boolean defaultValue) {
+    String key = context.getString(R.string.pref_key_fasting_white_days);
+    return getPrefs().getBoolean(key, defaultValue);
+  }
+
+  public boolean isFastAshura() {
+    return fastAshura == null ? fastAshura = isFastAshura(false) : fastAshura;
+  }
+
+  private boolean isFastAshura(boolean defaultValue) {
+    String key = context.getString(R.string.pref_key_fasting_ashura);
     return getPrefs().getBoolean(key, defaultValue);
   }
 

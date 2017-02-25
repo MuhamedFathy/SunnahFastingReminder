@@ -1,7 +1,7 @@
 <!--suppress AndroidElementNotAllowed -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <ListPreference
+  <android.support.v7.preference.ListPreference
       android:defaultValue="0"
       android:dialogTitle="@string/pref_title_choose_language"
       android:entries="@array/language"
@@ -49,9 +49,9 @@
 
   <!--<PreferenceScreen android:title="@string/pref_title_tips">-->
 
-  <Preference
-      android:key="custom"
-      android:layout="@layout/prefs_questions_layout"/>
+  <!--<Preference-->
+  <!--android:key="custom"-->
+  <!--android:layout="@layout/prefs_questions_layout"/>-->
 
   <!--</PreferenceScreen>-->
 </PreferenceScreen>

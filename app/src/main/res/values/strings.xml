@@ -31,6 +31,13 @@
 
   <string name="pref_title_tips">Useful tips!</string>
 
+  <string name="do_not_forget">Don\'t forget to fast tomorrow in sha\' allah</string>
+
+  <string name="fast_monday">Monday fasting</string>
+  <string name="fast_thursday">Thursday fasting</string>
+  <string name="fast_whites">White days fasting (day %1$s)</string>
+  <string name="fast_ashura">Ashura fasting (day %1$s)</string>
+
   <!-- Arrays -->
   <string-array name="language">
     <item>@string/lang_arabic</item>

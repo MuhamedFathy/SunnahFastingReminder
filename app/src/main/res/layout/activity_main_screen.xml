@@ -20,6 +20,7 @@
         android:background="?attr/colorPrimary"
         app:logo="@drawable/ic_logo_moon"
         app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/app_name"
         app:titleTextColor="@color/white"/>
 
   </android.support.design.widget.AppBarLayout>

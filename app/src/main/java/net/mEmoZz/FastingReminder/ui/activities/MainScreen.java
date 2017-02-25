@@ -1,7 +1,9 @@
 package net.mEmoZz.FastingReminder.ui.activities;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +13,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import butterknife.BindBitmap;
+import butterknife.BindColor;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +38,11 @@ public class MainScreen extends AppCompatActivity {
 
   @BindView(R.id.toolbar) Toolbar toolbar;
 
+  @BindBitmap(R.drawable.ic_logo_moon) Bitmap logo;
+
   @BindString(R.string.app_name) String appName;
+
+  @BindColor(R.color.colorPrimary) int colorPrimary;
 
   private Activity context;
 
@@ -51,7 +59,8 @@ public class MainScreen extends AppCompatActivity {
     SimpleHijriDate date = HijriCalc.toHijri(new Date());
     Log.wtf("hijriDayName", date.getDayOfWeekName(Locale.getDefault()));
     Log.wtf("hijriDayOfWeek", date.getDayOfWeek() + "");
-    Log.wtf("hijriDayOfMonth", date.getDayOfMonth() + 1 + "");
+    Log.wtf("hijriDayOfMonth", date.getMonth() + "");
+    Log.wtf("hijriDayOfMonth", date.getDayOfMonth() + "");
     Log.wtf("hijriMonth", date.getMonthName(Locale.getDefault()));
     Log.wtf("hijriYear", date.getYear() + "");
 
@@ -63,6 +72,9 @@ public class MainScreen extends AppCompatActivity {
   }
 
   private void initToolbar() {
+    if (Utils.isAboveLollipop()) {
+      setTaskDescription(new ActivityManager.TaskDescription(appName, logo, colorPrimary));
+    }
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
     if (actionBar != null) actionBar.setTitle(appName);
