@@ -27,8 +27,10 @@ import org.arabeyes.itl.hijri.SimpleHijriDate;
 public class NotifierService extends Service {
 
   private static final int MUHARRAM = 0;
+
   private static final int SUNDAY = 0;
   private static final int WEDNESDAY = 3;
+
   private static final int TYPE_WHITES = 1;
   private static final int TYPE_ASHURA = 2;
 
@@ -108,7 +110,7 @@ public class NotifierService extends Service {
         .setContentTitle(title)
         .setContentText(msg)
         .setAutoCancel(true)
-        .setVibrate(new long[] { 300, 300, 300, 300 })
+        .setVibrate(new long[] { 400, 400, 400, 400 })
         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
         .setLights(ContextCompat.getColor(context, R.color.colorPrimary), 1500, 1000)
         .setColor(ContextCompat.getColor(context, R.color.colorPrimary))

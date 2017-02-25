@@ -3,102 +3,109 @@ package net.mEmoZz.FastingReminder.ui.activities;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import butterknife.BindBitmap;
-import butterknife.BindColor;
-import butterknife.BindString;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.widget.SwitchCompat;
+import android.view.View;
+import android.view.Window;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import java.util.Date;
-import java.util.Locale;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
+import java.util.ArrayList;
+import java.util.List;
 import net.mEmoZz.FastingReminder.R;
-import net.mEmoZz.FastingReminder.ui.fragments.SettingsFragment;
-import net.mEmoZz.FastingReminder.utilities.Constants;
+import net.mEmoZz.FastingReminder.services.NotifierService;
+import net.mEmoZz.FastingReminder.ui.activities.base.BaseActivity;
 import net.mEmoZz.FastingReminder.utilities.PreferencesUtils;
 import net.mEmoZz.FastingReminder.utilities.Utils;
-import org.arabeyes.itl.hijri.HijriCalc;
-import org.arabeyes.itl.hijri.SimpleHijriDate;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
- * Authored by Mohamed Fathy on 20 Feb, 2017.
+ * Authored by Mohamed Fathy on 25 Feb, 2017.
  * Contact: muhamed.gendy@gmail.com
  */
 
-public class MainScreen extends AppCompatActivity {
+public class MainScreen extends BaseActivity {
 
-  @BindView(R.id.toolbar) Toolbar toolbar;
+  private static final int REQUEST_LANGUAGE_CHANGE = 1;
 
-  @BindBitmap(R.drawable.ic_logo_moon) Bitmap logo;
-
-  @BindString(R.string.app_name) String appName;
-
-  @BindColor(R.color.colorPrimary) int colorPrimary;
+  @BindView(R.id.enableService) SwitchCompat enableService;
 
   private Activity context;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     context = this;
-    applyFont();
     setContentView(R.layout.activity_main_screen);
     ButterKnife.bind(this);
-    initToolbar();
-    replaceFragment(new SettingsFragment());
+    Utils.setTranslucentBarWithPadding(context, null);
+    initSwitch();
+  }
 
-    SimpleHijriDate date = HijriCalc.toHijri(new Date());
-    Log.wtf("hijriDayName", date.getDayOfWeekName(Locale.getDefault()));
-    Log.wtf("hijriDayOfWeek", date.getDayOfWeek() + "");
-    Log.wtf("hijriDayOfMonth", date.getMonth() + "");
-    Log.wtf("hijriDayOfMonth", date.getDayOfMonth() + "");
-    Log.wtf("hijriMonth", date.getMonthName(Locale.getDefault()));
-    Log.wtf("hijriYear", date.getYear() + "");
+  private void initSwitch() {
+    if (new PreferencesUtils(context).isAppEnabled()) enableService.setChecked(true);
+  }
 
-    if (date.getDayOfWeek() == 1) {
-      System.out.println("الإثنين");
-    } else if (date.getDayOfWeek() == 4) {
-      System.out.println("الخميس");
+  @OnCheckedChanged(R.id.enableService) public void onChecked(boolean isChecked) {
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    prefs.edit().putBoolean(PreferencesUtils.KEY_ENABLE_SERVICE, isChecked).apply();
+    if (isChecked) {
+      startNotifierService();
+    } else {
+      stopNotifierService();
     }
   }
 
-  private void initToolbar() {
+  @OnClick(R.id.btnSettings) public void onClick() {
+    startActivity();
+  }
+
+  @SuppressWarnings("unchecked") private void startActivity() {
+    Intent intent = new Intent(context, SettingsScreen.class);
     if (Utils.isAboveLollipop()) {
-      setTaskDescription(new ActivityManager.TaskDescription(appName, logo, colorPrimary));
-    }
-    setSupportActionBar(toolbar);
-    ActionBar actionBar = getSupportActionBar();
-    if (actionBar != null) actionBar.setTitle(appName);
-  }
-
-  private FragmentManager replaceFragment(Fragment fragment) {
-    FragmentManager manager = ((FragmentActivity) context).getSupportFragmentManager();
-    FragmentTransaction transaction = manager.beginTransaction();
-    transaction.replace(R.id.content_main, fragment).commit();
-    return manager;
-  }
-
-  private void applyFont() {
-    switch (new PreferencesUtils(this).getLanguage()) {
-      case Constants.LOCALE.LANG_ARABIC:
-        Utils.initCalligraphy(Constants.FONTS.ARABIC_FONT);
-        break;
-      case Constants.LOCALE.LANG_ENGLISH:
-        Utils.initCalligraphy(Constants.FONTS.ENGLISH_FONT);
-        break;
+      View navigationBar = context.findViewById(android.R.id.navigationBarBackground);
+      List<Pair<View, String>> pairs = new ArrayList<>();
+      pairs.add(Pair.create(navigationBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME));
+      ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+          context,
+          pairs.toArray(new Pair[pairs.size()])
+      );
+      startActivityForResult(intent, REQUEST_LANGUAGE_CHANGE, options.toBundle());
+    } else {
+      startActivityForResult(intent, REQUEST_LANGUAGE_CHANGE);
     }
   }
 
-  @Override protected void attachBaseContext(Context newBase) {
-    super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+  private void startNotifierService() {
+    Class notifier = NotifierService.class;
+    if (!isServiceRunning(notifier)) context.startService(new Intent(context, notifier));
+  }
+
+  private void stopNotifierService() {
+    context.stopService(new Intent(context, NotifierService.class));
+  }
+
+  private boolean isServiceRunning(Class<?> serviceClass) {
+    ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+    for (
+        ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)
+        ) {
+      if (serviceClass.getName().equals(service.service.getClassName())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch (requestCode) {
+      case REQUEST_LANGUAGE_CHANGE:
+        if (resultCode == RESULT_OK) recreate();
+    }
   }
 }

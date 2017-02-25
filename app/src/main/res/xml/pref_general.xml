@@ -10,13 +10,7 @@
       android:summary="@string/lang_arabic"
       android:title="@string/pref_title_language"/>
 
-  <SwitchPreferenceCompat
-      android:defaultValue="true"
-      android:key="@string/pref_key_enable_app"
-      android:title="@string/pref_title_enable_app"/>
-
   <PreferenceCategory
-      android:dependency="@string/pref_key_enable_app"
       android:title="@string/pref_cat_fasting_days">
 
     <CheckBoxPreference

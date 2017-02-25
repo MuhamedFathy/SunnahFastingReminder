@@ -13,6 +13,8 @@ import net.mEmoZz.FastingReminder.utilities.Constants.LOCALE;
 
 public class PreferencesUtils {
 
+  public static final String KEY_ENABLE_SERVICE = "enable_app";
+
   private Context context;
   private Integer language;
   private Boolean enableApp, fastMonday, fastThursday, fastWhites, fastAshura;
@@ -31,12 +33,11 @@ public class PreferencesUtils {
   }
 
   public boolean isAppEnabled() {
-    return enableApp == null ? enableApp = isAppEnabled(false) : enableApp;
+    return enableApp == null ? enableApp = isAppEnabled(true) : enableApp;
   }
 
   private boolean isAppEnabled(boolean defaultValue) {
-    String key = context.getString(R.string.pref_key_enable_app);
-    return getPrefs().getBoolean(key, defaultValue);
+    return getPrefs().getBoolean(KEY_ENABLE_SERVICE, defaultValue);
   }
 
   public boolean isFastMonday() {
