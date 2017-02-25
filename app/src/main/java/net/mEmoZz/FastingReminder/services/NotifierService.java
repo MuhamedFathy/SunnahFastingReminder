@@ -91,14 +91,6 @@ public class NotifierService extends Service {
     }
   }
 
-  private PreferencesUtils getPrefs() {
-    return new PreferencesUtils(this);
-  }
-
-  private void runOnUiThread(Runnable runnable) {
-    handler.post(runnable);
-  }
-
   private void pushMultipleFastingNotify(int type, String day) {
     switch (type) {
       case TYPE_WHITES:
@@ -121,6 +113,14 @@ public class NotifierService extends Service {
         .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
         .setPriority(NotificationCompat.PRIORITY_HIGH);
     NotificationManagerCompat.from(context).notify(0, builder.build());
+  }
+
+  private PreferencesUtils getPrefs() {
+    return new PreferencesUtils(this);
+  }
+
+  private void runOnUiThread(Runnable runnable) {
+    handler.post(runnable);
   }
 
   @Override public void onDestroy() {
