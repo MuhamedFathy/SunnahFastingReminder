@@ -108,6 +108,7 @@ public class NotifierService extends Service {
         .setContentTitle(title)
         .setContentText(msg)
         .setAutoCancel(true)
+        .setVibrate(new long[] { 300, 300, 300, 300 })
         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
         .setLights(ContextCompat.getColor(context, R.color.colorPrimary), 1500, 1000)
         .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
