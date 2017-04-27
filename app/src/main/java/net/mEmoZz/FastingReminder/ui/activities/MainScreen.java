@@ -2,6 +2,7 @@ package net.mEmoZz.FastingReminder.ui.activities;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ public class MainScreen extends BaseActivity {
     setContentView(R.layout.activity_main_screen);
     ButterKnife.bind(this);
     Utils.setTranslucentBarWithPadding(context, null);
+
     initSwitch();
   }
 
@@ -92,9 +94,7 @@ public class MainScreen extends BaseActivity {
 
   private boolean isServiceRunning(Class<?> serviceClass) {
     ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-    for (
-        ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)
-        ) {
+    for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
       if (serviceClass.getName().equals(service.service.getClassName())) {
         return true;
       }
@@ -106,6 +106,7 @@ public class MainScreen extends BaseActivity {
     switch (requestCode) {
       case REQUEST_LANGUAGE_CHANGE:
         if (resultCode == RESULT_OK) recreate();
+        break;
     }
   }
 }

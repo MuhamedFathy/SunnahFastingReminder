@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#2c3e50</color>
+  <color name="colorPrimary">#042E3D</color>
   <color name="colorPrimaryDark">#1b2732</color>
   <color name="colorAccent">#b71c1c</color>
   <color name="white">#fafafa</color>
   <color name="transWhite">#b4fafafa</color>
+  <color name="ripple_dark">#33ffffff</color>
+  <color name="ripple_light">#1f000000</color>
 </resources>

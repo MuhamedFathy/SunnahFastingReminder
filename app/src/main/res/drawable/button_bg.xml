@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-
-  <stroke
-      android:color="@color/white"
-      android:width="2dp"/>
-
-  <solid android:color="@android:color/transparent"/>
-
-  <corners android:radius="8dp"/>
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:exitFadeDuration="250">
+  <item android:drawable="@drawable/button_bg_pressed" android:state_pressed="true"/>
+  <item android:drawable="@drawable/button_bg_normal"/>
+</selector>

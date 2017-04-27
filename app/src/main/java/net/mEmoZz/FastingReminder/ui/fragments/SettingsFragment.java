@@ -16,6 +16,7 @@ import butterknife.Unbinder;
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 import net.mEmoZz.FastingReminder.R;
 import net.mEmoZz.FastingReminder.language.Localization;
+import net.mEmoZz.FastingReminder.ui.activities.SettingsScreen;
 import net.mEmoZz.FastingReminder.utilities.PreferencesUtils;
 
 /**
@@ -30,6 +31,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
   @BindString(R.string.pref_key_fasting_thursday) String thursday;
   @BindString(R.string.pref_key_fasting_white_days) String whites;
   @BindString(R.string.pref_key_fasting_ashura) String ashura;
+  @BindString(R.string.pref_key_lang_dialog) String languageKey;
 
   private Activity context;
   private Unbinder unbinder;
@@ -44,6 +46,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
       Bundle savedInstanceState) {
     View root = super.onCreateView(inflater, container, savedInstanceState);
     unbinder = ButterKnife.bind(this, root);
+
     if (isAdded()) initPrefs(getPreferenceManager());
     return root;
   }
@@ -70,10 +73,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
   private void initPrefs(PreferenceManager manager) {
     PreferenceManager.setDefaultValues(context, R.xml.pref_general, false);
-
-    updateLangSummary(
-        (ListPreference) manager.findPreference(getString(R.string.pref_key_lang_dialog))
-    );
+    updateLangSummary((ListPreference) manager.findPreference(languageKey));
   }
 
   private void updateLangSummary(ListPreference languagePrefs) {
@@ -81,9 +81,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
   }
 
   @Override public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-    if (key.equals(getString(R.string.pref_key_lang_dialog))) {
+    if (key.equals(languageKey)) {
       Localization.setLanguage(context, new PreferencesUtils(context).getLanguage());
-      context.setResult(Activity.RESULT_OK);
+      SettingsScreen.isLangChanged = true;
       context.recreate();
     }
   }

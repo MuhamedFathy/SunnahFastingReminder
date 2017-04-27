@@ -16,6 +16,7 @@ public class FastingApplication extends Application {
 
   @Override public void onCreate() {
     super.onCreate();
+
     validateLanguage();
   }
 
