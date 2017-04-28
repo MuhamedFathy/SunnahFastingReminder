@@ -1,7 +1,5 @@
 package net.mEmoZz.FastingReminder.utilities;
 
-import android.content.SharedPreferences;
-
 /**
  * Authored by Mohamed Fathy on 20 Feb, 2017.
  * Contact: muhamed.gendy@gmail.com
@@ -19,15 +17,6 @@ import android.content.SharedPreferences;
 
     public static final String ARABIC = "ar";
     public static final String English = "en";
-  }
-
-  /**
-   * {@link SharedPreferences} keys.
-   */
-  public static class SHARED_PREFS {
-
-    public static final String MAIN_PREFS_NAME = "app_prefs";
-    public static final String LANG_PREFS_NAME = "language_prefs";
   }
 
   /**

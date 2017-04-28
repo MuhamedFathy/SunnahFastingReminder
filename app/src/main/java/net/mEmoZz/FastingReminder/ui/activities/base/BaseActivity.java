@@ -1,5 +1,6 @@
 package net.mEmoZz.FastingReminder.ui.activities.base;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -22,7 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Contact: muhamed.gendy@gmail.com
  */
 
-public class BaseActivity extends AppCompatActivity {
+@SuppressLint("Registered") public class BaseActivity extends AppCompatActivity {
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
