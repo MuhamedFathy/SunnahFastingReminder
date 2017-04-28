@@ -1,9 +1,6 @@
 package net.mEmoZz.FastingReminder.ui.activities;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningServiceInfo;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,8 +17,8 @@ import butterknife.OnClick;
 import java.util.ArrayList;
 import java.util.List;
 import net.mEmoZz.FastingReminder.R;
-import net.mEmoZz.FastingReminder.services.NotifierService;
 import net.mEmoZz.FastingReminder.ui.activities.base.BaseActivity;
+import net.mEmoZz.FastingReminder.utilities.AlarmUtils;
 import net.mEmoZz.FastingReminder.utilities.PreferencesUtils;
 import net.mEmoZz.FastingReminder.utilities.Utils;
 
@@ -56,11 +53,8 @@ public class MainScreen extends BaseActivity {
   @OnCheckedChanged(R.id.enableService) public void onChecked(boolean isChecked) {
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
     prefs.edit().putBoolean(PreferencesUtils.KEY_ENABLE_SERVICE, isChecked).apply();
-    if (isChecked) {
-      startNotifierService();
-    } else {
-      stopNotifierService();
-    }
+
+    if (isChecked) AlarmUtils.setAlarm(context);
   }
 
   @OnClick(R.id.btnSettings) public void onClick() {
@@ -81,25 +75,6 @@ public class MainScreen extends BaseActivity {
     } else {
       startActivityForResult(intent, REQUEST_LANGUAGE_CHANGE);
     }
-  }
-
-  private void startNotifierService() {
-    Class notifier = NotifierService.class;
-    if (!isServiceRunning(notifier)) context.startService(new Intent(context, notifier));
-  }
-
-  private void stopNotifierService() {
-    context.stopService(new Intent(context, NotifierService.class));
-  }
-
-  private boolean isServiceRunning(Class<?> serviceClass) {
-    ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-    for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-      if (serviceClass.getName().equals(service.service.getClassName())) {
-        return true;
-      }
-    }
-    return false;
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {

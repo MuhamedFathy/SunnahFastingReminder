@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <string name="app_name">Fasting Reminder</string>
   <string name="app_description">Hope for Allah forgiveness</string>
 
@@ -30,7 +30,7 @@
 
   <string name="pref_title_fasting_ashura">Ashura day</string>
   <string name="pref_sum_fasting_ashura_num">(9 – 10) Muharram</string>
-  <string name="pref_key_fasting_ashura">day_ashura</string>
+  <string name="pref_key_fasting_ashura" translatable="false">day_ashura</string>
 
   <string name="pref_title_tips">Useful tips!</string>
 
@@ -47,7 +47,7 @@
     <item>@string/lang_english</item>
   </string-array>
 
-  <string-array name="language_values">
+  <string-array name="language_values" tools:ignore="MissingTranslation">
     <item>0</item>
     <item>1</item>
   </string-array>

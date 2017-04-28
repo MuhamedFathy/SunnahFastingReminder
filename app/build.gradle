@@ -5,7 +5,7 @@ android {
   buildToolsVersion "25.0.2"
   defaultConfig {
     applicationId "net.mEmoZz.FastingReminder"
-    minSdkVersion 11
+    minSdkVersion 16
     targetSdkVersion 25
     versionCode 1
     versionName "1.0"
