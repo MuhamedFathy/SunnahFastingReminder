@@ -13,3 +13,7 @@ Islamic app to remind users to fast sunnah days
 
 * [@fikr4n](https://github.com/fikr4n) - ITL-Java [**Islamic Tools and Libraries**]
 
+### Privacy policy
+
+This app and code is free to use and share with any one and you can use source as you want.
+
