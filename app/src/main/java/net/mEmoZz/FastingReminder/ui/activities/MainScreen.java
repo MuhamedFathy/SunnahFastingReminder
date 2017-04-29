@@ -64,13 +64,13 @@ public class MainScreen extends BaseActivity {
   @SuppressWarnings({ "unchecked", "ConstantConditions" }) private void startActivity() {
     Intent intent = new Intent(context, SettingsScreen.class);
     if (Utils.isAboveLollipop()) {
-      View navigationBar = context.findViewById(android.R.id.navigationBarBackground);
       List<Pair<View, String>> pairs = new ArrayList<>();
+      View navigationBar = context.findViewById(android.R.id.navigationBarBackground);
       Pair<View, String> navBarPair = Pair.create(
           navigationBar,
           Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME
       );
-      if (navBarPair != null) pairs.add(navBarPair);
+      if (navigationBar != null) pairs.add(navBarPair);
       ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
           context,
           pairs.toArray(new Pair[pairs.size()])
