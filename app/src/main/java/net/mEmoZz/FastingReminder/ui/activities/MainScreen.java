@@ -70,7 +70,7 @@ public class MainScreen extends BaseActivity {
           navigationBar,
           Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME
       );
-      if (pairs != null) pairs.add(navBarPair);
+      if (navBarPair != null) pairs.add(navBarPair);
       ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
           context,
           pairs.toArray(new Pair[pairs.size()])
