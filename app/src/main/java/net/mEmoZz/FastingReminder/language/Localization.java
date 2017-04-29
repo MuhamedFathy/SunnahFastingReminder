@@ -18,7 +18,7 @@ public class Localization {
   @SuppressWarnings("deprecation") public static void setLanguage(Context context, int lang) {
     Configuration config = context.getResources().getConfiguration();
     if (lang == Constants.LOCALE.LANG_ENGLISH) {
-      Locale mLocale = new Locale(Constants.LOCALE.English);
+      Locale mLocale = new Locale(Constants.LOCALE.ENGLISH);
       Locale.setDefault(mLocale);
       if (!getLocale(config).equals(mLocale)) {
         setLocale(config, mLocale);
