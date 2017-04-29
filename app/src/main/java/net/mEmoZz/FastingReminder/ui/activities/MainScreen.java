@@ -54,7 +54,11 @@ public class MainScreen extends BaseActivity {
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
     prefs.edit().putBoolean(PreferencesUtils.KEY_ENABLE_SERVICE, isChecked).apply();
 
-    if (isChecked) AlarmUtils.setAlarm(context);
+    if (isChecked) {
+      AlarmUtils.setAlarm(context);
+    } else {
+      AlarmUtils.cancelAlarm(context);
+    }
   }
 
   @OnClick(R.id.btnSettings) public void onClick() {

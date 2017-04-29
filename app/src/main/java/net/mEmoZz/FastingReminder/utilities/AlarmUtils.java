@@ -16,11 +16,19 @@ public class AlarmUtils {
 
   public static void setAlarm(Context context) {
     AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    long everyday = 24 * 60 * 60 * 1000;
+    am.setRepeating(AlarmManager.RTC_WAKEUP, getTimeInMillis(), everyday, getAlarmIntent(context));
+  }
+
+  public static void cancelAlarm(Context context) {
+    AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    am.cancel(getAlarmIntent(context));
+  }
+
+  private static PendingIntent getAlarmIntent(Context context) {
     Intent intent = new Intent(context, AlarmReceiver.class);
     int flag = PendingIntent.FLAG_UPDATE_CURRENT;
-    long everyday = 24 * 60 * 60 * 1000;
-    PendingIntent pi = PendingIntent.getBroadcast(context, 0x333, intent, flag);
-    am.setRepeating(AlarmManager.RTC_WAKEUP, getTimeInMillis(), everyday, pi);
+    return PendingIntent.getBroadcast(context, 0x333, intent, flag);
   }
 
   private static long getTimeInMillis() {
