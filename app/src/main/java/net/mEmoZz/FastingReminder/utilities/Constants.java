@@ -16,7 +16,7 @@ package net.mEmoZz.FastingReminder.utilities;
     public static final int LANG_ENGLISH = 1;
 
     public static final String ARABIC = "ar";
-    public static final String English = "en";
+    public static final String ENGLISH = "en";
   }
 
   /**
