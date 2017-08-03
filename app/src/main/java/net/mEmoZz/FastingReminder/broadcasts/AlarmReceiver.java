@@ -56,7 +56,8 @@ public class AlarmReceiver extends BroadcastReceiver {
       if (date.getDayOfWeek() == SUNDAY) {
         pushSingleFastingNotify(
             context.getString(R.string.fast_monday),
-            context.getString(R.string.do_not_forget));
+            context.getString(R.string.do_not_forget)
+        );
       }
     }
   }
