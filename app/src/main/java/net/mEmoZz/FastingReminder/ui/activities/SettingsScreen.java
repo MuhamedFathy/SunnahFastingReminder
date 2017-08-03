@@ -39,7 +39,7 @@ public class SettingsScreen extends BaseActivity {
     ButterKnife.bind(this);
 
     initToolbar();
-    replaceFragment(new SettingsFragment());
+    replaceFragment(SettingsFragment.newInstance());
   }
 
   @Override public void onBackPressed() {
