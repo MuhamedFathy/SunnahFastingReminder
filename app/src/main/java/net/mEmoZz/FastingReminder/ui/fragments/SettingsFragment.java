@@ -35,6 +35,13 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
   private Activity context;
   private Unbinder unbinder;
+  
+   public SettingsFragment() {
+   }
+   
+   public static SettingsFragment newInstance() {
+    return new SettingsFragment();
+   }
 
   @Override
   public void onCreatePreferencesFix(@Nullable Bundle savedInstanceState, String rootKey) {
