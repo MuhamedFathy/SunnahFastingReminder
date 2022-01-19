@@ -15,5 +15,7 @@ Islamic app to remind users to fast sunnah days
 
 ### Privacy policy
 
-This app and code is free to use and share with any one and you can use source as you want.
+- This app doesn't take any data or informations from you.
+
+- This app and code is free to use and share with any one and you can use source as you want.
 
